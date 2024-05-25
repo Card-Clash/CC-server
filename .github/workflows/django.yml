@@ -22,8 +22,8 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - uses: Harmon758/postgresql-action@v1.0.0
     - name: Setup PostgreSQL
+      uses: Harmon758/postgresql-action@v1.0.0
       with:
         postgresql db: ${{ secrets.DB_NAME }}
         postgresql user: ${{ secrets.DB_USER }}
