@@ -1,5 +1,5 @@
 """
-WSGI config for Card_Clash project.
+WSGI config for card_clash project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Card_Clash.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'card_clash.settings')
 
 application = get_wsgi_application()

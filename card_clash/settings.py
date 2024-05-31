@@ -40,7 +40,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Card_Clash.urls'
+ROOT_URLCONF = 'card_clash.urls'
 
 TEMPLATES = [
     {
@@ -58,7 +58,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Card_Clash.wsgi.application'
+WSGI_APPLICATION = 'card_clash.wsgi.application'
 
 
 # Database

@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Card_Clash.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'card_clash.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
