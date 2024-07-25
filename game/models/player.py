@@ -1,3 +1,4 @@
+from random import choice
 from xmlrpc.client import DateTime
 
 from django.contrib.auth.base_user import AbstractBaseUser
@@ -71,6 +72,21 @@ class Player(AbstractBaseUser, PermissionsMixin):
                 moderator=moderator,
                 reason=reason,
             )
+
+    def add_card(self, *, card, quantity: int = 1):
+        if card in self.card_set.all():
+            player_card = self.playercard_set.get(card=card)
+            player_card.quantity += quantity
+            player_card.save()
+        else:
+            self.card_set.add(card, through_defaults={"quantity": quantity})
+
+    def draw_card(self):
+        personal_deck = []
+        for player_card in self.playercard_set.all():
+            for _ in range(player_card.quantity):
+                personal_deck.append(player_card.card)
+        return choice(personal_deck)
 
     def __str__(self):
         return self.username
