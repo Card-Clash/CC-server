@@ -10,6 +10,9 @@ class CardColor(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        db_table = "game_card_color"
+
 
 class CardElement(models.Model):
     name = models.CharField(max_length=50)
@@ -17,12 +20,18 @@ class CardElement(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        db_table = "game_card_element"
+
 
 class CardPower(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        db_table = "game_card_power"
 
 
 class Card(models.Model):
@@ -42,7 +51,13 @@ class PlayerCard(models.Model):
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
     quantity = models.IntegerField("quantity of cards", default=1)
 
+    class Meta:
+        db_table = "game_player_card"
+
 
 class CardStarterDeck(models.Model):
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+
+    class Meta:
+        db_table = "game_card_starter_deck"
