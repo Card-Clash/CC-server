@@ -51,6 +51,9 @@ class PlayerCard(models.Model):
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
     quantity = models.IntegerField("quantity of cards", default=1)
 
+    def __str__(self):
+        return f"[player id {self.player.id}] [card id {self.card.id}] [quantity {self.quantity}]"
+
     class Meta:
         db_table = "game_player_card"
 
@@ -58,6 +61,9 @@ class PlayerCard(models.Model):
 class CardStarterDeck(models.Model):
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"[card id {self.card.id}] [quantity {self.quantity}]"
 
     class Meta:
         db_table = "game_card_starter_deck"

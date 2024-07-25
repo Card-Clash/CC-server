@@ -72,7 +72,15 @@ class PlayerAdmin(admin.ModelAdmin):
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
     list_display = ["id", "color", "element", "power", "value"]
+    list_filter = ["color", "element", "power", "value"]
+    search_fields = ["id"]
+
+
+@admin.register(Ban)
+class CardAdmin(admin.ModelAdmin):
+    list_display = ["player", "issued", "expires", "moderator"]
+    list_filter = ["player", "issued", "expires", "moderator"]
+    search_fields = ["player"]
 
 
 admin.site.register(PlayerCard)
-admin.site.register(Ban)
