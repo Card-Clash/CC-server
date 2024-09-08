@@ -5,4 +5,4 @@
 
 Work in progress
 
-Coming in January 2025 (maby)
+Coming in January 2025 (maybe)
