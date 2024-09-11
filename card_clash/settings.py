@@ -1,8 +1,6 @@
 from os import environ
 from pathlib import Path
 
-from dotenv import load_dotenv
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -16,6 +14,8 @@ SECRET_KEY = environ["SECRET_KEY"]
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+CSRF_TRUSTED_ORIGINS = [f'https://*.discordsays.com', 'https://localhost']
 
 # Application definition
 
