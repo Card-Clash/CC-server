@@ -480,6 +480,5 @@ cython_debug/
 !.idea/
 *.bat
 .idea/*
-.ruff_cache
-.github
+.ruff_cache/
 
