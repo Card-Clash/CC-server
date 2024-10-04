@@ -15,7 +15,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CSRF_TRUSTED_ORIGINS = [f'https://*.discordsays.com', 'https://localhost']
+# TODO: Remove this and improve security
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+# CSRF_TRUSTED_ORIGINS = [f'https://*.discordsays.com', 'https://localhost']
 
 # Application definition
 
