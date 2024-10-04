@@ -40,4 +40,4 @@ def get_player_data(request):
     if request.method == "POST":
         player_id = loads(request.body.decode('utf-8')).get('player_id')
         player = Player.objects.get(pk=player_id)
-        return JsonResponse(player.__dict__())
+        return JsonResponse(player.to_json(), safe=False)

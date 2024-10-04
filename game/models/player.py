@@ -91,6 +91,6 @@ class Player(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.username
 
-    def __dict__(self):
-        return {"id": self.id, "username": self.username, "is_staff": self.is_staff, "is_active": self.is_active,
-                "coins": self.coins, "permanent_ban": self.permanent_ban, "date_joined": self.date_joined}
+    def to_json(self) -> str:
+        return str({"id": self.id, "username": self.username, "is_staff": self.is_staff, "is_active": self.is_active,
+                    "coins": self.coins, "permanent_ban": self.permanent_ban, "date_joined": self.date_joined})
