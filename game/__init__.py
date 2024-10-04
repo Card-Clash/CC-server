@@ -14,9 +14,13 @@ data = {
     "handler": 2
 }
 
-response = requests.post(url, headers=headers, json=data)
+try:
+    response = requests.post(url, headers=headers, json=data)
+except requests.exceptions.ConnectionError:
+    response = requests.Response()
+    response.status_code = 500
 
 if response.status_code == 200:
     print("Entry Command Registered")
 else:
-    print("Entry Command Not Registered")
+    print("Entry Command NOT Registered")
