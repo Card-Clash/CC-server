@@ -41,3 +41,10 @@ def get_player_data(request):
         player_id = loads(request.body.decode('utf-8')).get('player_id')
         player = Player.objects.get(pk=player_id)
         return JsonResponse(player.to_json(), safe=False)
+
+
+def get_player_card(request):
+    if request.method == "GET":
+        player_id = loads(request.body.decode('utf-8')).get('player_id')
+        player_cards = Player.objects.get(pk=player_id).card_set.all()
+        return JsonResponse(list(player_cards.values()), safe=False)
