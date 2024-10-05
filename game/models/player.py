@@ -22,7 +22,7 @@ class Player(AbstractBaseUser, PermissionsMixin):
             "unique": "A user with that username already exists.",
         },
     )
-    coins = models.IntegerField(default=0)
+    coins = models.PositiveIntegerField(default=0)
     permanent_ban = models.BooleanField(default=False, help_text="If this player has a permanent ban")
     discord_id = models.PositiveBigIntegerField(help_text="Identification number of the player in Discord")
     email = models.EmailField("email address")
@@ -38,17 +38,29 @@ class Player(AbstractBaseUser, PermissionsMixin):
         "Designates whether this user should be treated as active. "
         "Unselect this instead of deleting accounts.",
     )
-    date_joined = models.DateTimeField("date joined", default=timezone.now)
+    date_joined = models.DateTimeField(default=timezone.now)
 
     objects = UserManager()
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ["email"]
+    REQUIRED_FIELDS = [EMAIL_FIELD]
 
     class Meta:
         verbose_name = "player"
         verbose_name_plural = "players"
+
+    @property
+    def personal_deck(self):
+        """
+        Return the list of cards from this player's personal deck.
+        :return:  list[game.models.Card]
+        """
+        personal_deck = []
+        for player_card in self.playercard_set.all():
+            for _ in range(player_card.quantity):
+                personal_deck.append(player_card.card)
+        return personal_deck
 
     def clean(self):
         super().clean()
@@ -60,6 +72,7 @@ class Player(AbstractBaseUser, PermissionsMixin):
 
     def ban(self, *, permanent: bool = False, issued: DateTime = None, expires: DateTime = None, moderator=None,
             reason: str = None):
+        """Ban this user."""
         from game.models import Ban
 
         if permanent:
@@ -74,6 +87,7 @@ class Player(AbstractBaseUser, PermissionsMixin):
             )
 
     def add_card(self, *, card, quantity: int = 1):
+        """Add a card to this player's card set."""
         if card in self.card_set.all():
             player_card = self.playercard_set.get(card=card)
             player_card.quantity += quantity
@@ -82,11 +96,10 @@ class Player(AbstractBaseUser, PermissionsMixin):
             self.card_set.add(card, through_defaults={"quantity": quantity})
 
     def draw_card(self):
-        personal_deck = []
-        for player_card in self.playercard_set.all():
-            for _ in range(player_card.quantity):
-                personal_deck.append(player_card.card)
-        return choice(personal_deck)
+        """Draw a card from this player's card set.
+        :return: game.models.Card
+        """
+        return choice(self.personal_deck)
 
     def __str__(self):
         return self.username
