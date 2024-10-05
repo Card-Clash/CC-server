@@ -40,7 +40,7 @@ def get_player_data(request):
         return JsonResponse(player.to_json(), safe=False)
 
 
-def get_player_card(request):
+def get_player_cards(request):
     if request.method == "GET":
         player_id = loads(request.body.decode('utf-8')).get('player_id')
         player_cards = Player.objects.get(pk=player_id).card_set.all()
