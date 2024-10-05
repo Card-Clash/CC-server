@@ -3,8 +3,6 @@ from os import environ
 import requests
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.views import View
-from pip._vendor.requests.models import Response
 
 from game.models import Player
 
@@ -35,9 +33,8 @@ def exchange_token(request):
         return JsonResponse({"error": "Only POST requests are allowed"}, status=405)
 
 
-@csrf_exempt
 def get_player_data(request):
-    if request.method == "POST":
+    if request.method == "GET":
         player_id = loads(request.body.decode('utf-8')).get('player_id')
         player = Player.objects.get(pk=player_id)
         return JsonResponse(player.to_json(), safe=False)
