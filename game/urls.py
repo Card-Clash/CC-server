@@ -1,8 +1,10 @@
 from django.urls import path
-from .views import exchange_token, get_player_data, get_player_cards
+
+from .views.player import PlayerData, PlayerCards
+from .views.discord import exchange_token
 
 urlpatterns = [
     path('api/token', exchange_token, name='exchange_token'),
-    path('api/get_player_data', get_player_data, name='get_player_data'),
-    path('api/get_player_cards', get_player_cards, name='get_player_cards'),
+    path('api/get_player_data', PlayerData.as_view(), name='get_player_data'),
+    path('api/get_player_cards', PlayerCards.as_view(), name='get_player_cards'),
 ]
