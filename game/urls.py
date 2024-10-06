@@ -5,6 +5,6 @@ from .views.discord import exchange_token
 
 urlpatterns = [
     path('api/token', exchange_token, name='exchange_token'),
-    path('api/get_player_data', PlayerData.as_view(), name='get_player_data'),
-    path('api/get_player_cards', PlayerCards.as_view(), name='get_player_cards'),
+    path('api/player_data', PlayerData.as_view(), name='player_data'),
+    path('api/player_cards', PlayerCards.as_view(), name='player_cards'),
 ]
