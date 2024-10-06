@@ -1,6 +1,5 @@
 from json import loads
 
-from asgiref.sync import sync_to_async
 from django.http import JsonResponse
 from django.views import View
 
